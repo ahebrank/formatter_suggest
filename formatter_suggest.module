@@ -59,7 +59,7 @@ function formatter_suggest_theme_suggestions_field_alter(&$suggestions, $variabl
     $suggestion = Xss::filter($field_display['third_party_settings']['formatter_suggest']['suggestion']);
     if (!empty($suggestion)) {
       foreach ($suggestions as $s) {
-        $suggestions[] = sprintf('%s--%s', $s, $suggestion);
+        $suggestions[] = sprintf('%s__%s', $s, $suggestion);
       }
     }
   }
