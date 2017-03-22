@@ -56,13 +56,15 @@ function formatter_suggest_theme_suggestions_field_alter(&$suggestions, $variabl
 
   // Add the suggestion
   if (isset($field_display['third_party_settings']['formatter_suggest'])) {
-    $suggestion = Xss::filter($field_display['third_party_settings']['formatter_suggest']['suggestion']);
-    $suggestion = str_replace('-', '_', $suggestion);
+    $suggestion_suffix = Xss::filter($field_display['third_party_settings']['formatter_suggest']['suggestion']);
+    $suggestion_suffix = str_replace('-', '_', $suggestion_suffix);
     
-    if (!empty($suggestion)) {
-      foreach ($suggestions as $s) {
-        $suggestions[] = sprintf('%s__%s', $s, $suggestion);
+    if (!empty($suggestion_suffix)) {
+      $appended_suggestions = [];
+      foreach ($suggestions as $original_suggestion) {
+        $appended_suggestions[] = sprintf('%s__%s', $original_suggestion, $suggestion_suffix);
       }
+      $suggestions = array_merge($suggestions, $appended_suggestions);
     }
   }
 }
