@@ -32,7 +32,7 @@ function formatter_suggest_field_formatter_third_party_settings_form(\Drupal\Cor
     '#title' => t('Template suggestion suffix'),
     '#default_value' => $plugin->getThirdPartySetting('formatter_suggest', 'suggestion'),
     '#attributes' => [
-      'placeholder' => 'example-variation',
+      'placeholder' => 'example_variation',
     ],
   ];
   return $element;
@@ -57,6 +57,8 @@ function formatter_suggest_theme_suggestions_field_alter(&$suggestions, $variabl
   // Add the suggestion
   if (isset($field_display['third_party_settings']['formatter_suggest'])) {
     $suggestion = Xss::filter($field_display['third_party_settings']['formatter_suggest']['suggestion']);
+    $suggestion = str_replace('-', '_', $suggestion);
+    
     if (!empty($suggestion)) {
       foreach ($suggestions as $s) {
         $suggestions[] = sprintf('%s__%s', $s, $suggestion);
