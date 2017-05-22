@@ -41,7 +41,7 @@ function formatter_suggest_field_formatter_third_party_settings_form(\Drupal\Cor
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for field templates.
  *
- * Adds tempalte suggestions according to the field formatter settings.
+ * Adds template suggestions according to the field formatter settings.
  */
 function formatter_suggest_theme_suggestions_field_alter(&$suggestions, $variables) {
 
